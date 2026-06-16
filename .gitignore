@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Test / tooling
+.pytest_cache/
+.cache/
+.mypy_cache/
+
+# Reports / artifacts
+reports/
+*.html
+
+# Secrets (LLM API keys)
+.env
+*.key
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
