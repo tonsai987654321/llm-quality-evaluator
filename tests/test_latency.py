@@ -7,7 +7,8 @@ def test_latency_score(llm_client, factual_prompt_item, extras):
     extras.append(pytest_html.extras.html(
         f"<b>Score:</b> {result['score']:.2f} &nbsp;|&nbsp; "
         f"<b>Elapsed:</b> {result['elapsed_seconds']:.2f}s &nbsp;|&nbsp; "
-        f"<b>Threshold:</b> 10s"
+        f"<b>Threshold:</b> 10s<br>"
+        f"<b>Response:</b><br><pre>{result['response']}</pre>"
     ))
     assert result["score"] >= 0.3, (
         f"Latency score {result['score']:.2f} too low ({result['elapsed_seconds']:.2f}s elapsed)"
