@@ -13,7 +13,11 @@ except ImportError:
 
 @pytest.fixture(scope="session")
 def llm_client():
-    return OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+    kwargs = {"api_key": os.environ["OPENAI_API_KEY"]}
+    base_url = os.environ.get("OPENAI_BASE_URL")
+    if base_url:
+        kwargs["base_url"] = base_url
+    return OpenAI(**kwargs)
 
 
 @pytest.fixture(scope="session")
