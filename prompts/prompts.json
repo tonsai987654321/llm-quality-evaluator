@@ -20,7 +20,11 @@
     "expected_facts": ["100"]
   },
   {
-    "prompt": "Explain what a REST API is in one sentence.",
+    "prompt": "Explain what a REST API is and how it works.",
+    "category": "technology"
+  },
+  {
+    "prompt": "Describe the difference between machine learning and deep learning.",
     "category": "technology"
   },
   {
