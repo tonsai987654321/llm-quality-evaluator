@@ -1,13 +1,16 @@
+import pytest_html
 from evaluators import consistency
 
 
-def test_consistency_scores(llm_client, prompt_data):
-    # Use open-ended prompts — short factual questions produce format-varied responses
-    # (LaTeX vs plain) that give misleadingly low token-overlap scores.
-    open_ended = [item for item in prompt_data if not item.get("expected_facts")]
-    assert open_ended, "Need at least one open-ended prompt in prompts.json"
-    for item in open_ended:
-        result = consistency.evaluate(llm_client, item["prompt"], n=3)
-        assert result["score"] >= 0.4, (
-            f"Consistency score {result['score']:.2f} too low for prompt: {item['prompt']}"
+def test_consistency_score(llm_client, open_ended_prompt_item, extras):
+    result = consistency.evaluate(llm_client, open_ended_prompt_item["prompt"], n=3)
+    extras.append(pytest_html.extras.html(
+        f"<b>Score:</b> {result['score']:.2f} &nbsp;|&nbsp; <b>Runs:</b> 3<br>"
+        + "<br>".join(
+            f"<b>Run {i+1}:</b> {r[:120]}{'…' if len(r) > 120 else ''}"
+            for i, r in enumerate(result["responses"])
         )
+    ))
+    assert result["score"] >= 0.4, (
+        f"Consistency score {result['score']:.2f} too low"
+    )

@@ -11,6 +11,11 @@ except ImportError:
     pass
 
 
+def _load_prompts():
+    with open("prompts/prompts.json") as f:
+        return json.load(f)
+
+
 @pytest.fixture(scope="session")
 def llm_client():
     kwargs = {"api_key": os.environ["OPENAI_API_KEY"]}
@@ -22,5 +27,16 @@ def llm_client():
 
 @pytest.fixture(scope="session")
 def prompt_data():
-    with open("prompts/prompts.json") as f:
-        return json.load(f)
+    return _load_prompts()
+
+
+def pytest_generate_tests(metafunc):
+    prompts = _load_prompts()
+    if "prompt_item" in metafunc.fixturenames:
+        metafunc.parametrize("prompt_item", prompts, ids=[p["prompt"] for p in prompts])
+    if "factual_prompt_item" in metafunc.fixturenames:
+        factual = [p for p in prompts if p.get("expected_facts")]
+        metafunc.parametrize("factual_prompt_item", factual, ids=[p["prompt"] for p in factual])
+    if "open_ended_prompt_item" in metafunc.fixturenames:
+        open_ended = [p for p in prompts if not p.get("expected_facts")]
+        metafunc.parametrize("open_ended_prompt_item", open_ended, ids=[p["prompt"] for p in open_ended])
