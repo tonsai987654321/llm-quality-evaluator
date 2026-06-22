@@ -22,7 +22,7 @@ def score_consistency(responses: list) -> float:
 def evaluate(client, prompt: str, n: int = 3) -> dict:
     responses = [
         client.chat.completions.create(
-            model="gpt-4.1-mini",
+            model="qwen3.6-35b-a3b",
             messages=[{"role": "user", "content": prompt}],
         ).choices[0].message.content
         for _ in range(n)

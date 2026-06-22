@@ -8,7 +8,7 @@ def score_hallucination(response: str, expected_facts: list) -> float:
 
 def evaluate(client, prompt: str, expected_facts: list) -> dict:
     response = client.chat.completions.create(
-        model="gpt-4.1-mini",
+        model="qwen3.6-35b-a3b",
         messages=[{"role": "user", "content": prompt}],
     )
     text = response.choices[0].message.content
