@@ -10,7 +10,7 @@ def score_latency(elapsed_seconds: float, threshold: float = 3.0) -> float:
 def evaluate(client, prompt: str) -> dict:
     start = time.time()
     response = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model="gpt-4.1-mini",
         messages=[{"role": "user", "content": prompt}],
     )
     elapsed = time.time() - start

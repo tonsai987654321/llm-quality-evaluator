@@ -2,7 +2,7 @@
 
 **Status:** Complete
 
-A pytest-based framework that sends structured test prompts to the OpenAI API (`gpt-4o-mini`), scores response quality across three dimensions, and generates a self-contained HTML quality report.
+A pytest-based framework that sends structured test prompts to the OpenAI API (`gpt-4.1-mini`), scores response quality across three dimensions, and generates a self-contained HTML quality report.
 
 **Stack:** Python · pytest · OpenAI · pytest-html · GitHub Actions
 
