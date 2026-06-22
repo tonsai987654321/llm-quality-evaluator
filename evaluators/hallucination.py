@@ -1,8 +1,12 @@
+def _normalize(text: str) -> str:
+    return text.lower().replace("₀", "0").replace("₁", "1").replace("₂", "2").replace("₃", "3")
+
+
 def score_hallucination(response: str, expected_facts: list) -> float:
     if not expected_facts:
         return 1.0
-    response_lower = response.lower()
-    found = sum(1 for fact in expected_facts if fact.lower() in response_lower)
+    response_norm = _normalize(response)
+    found = sum(1 for fact in expected_facts if _normalize(fact) in response_norm)
     return found / len(expected_facts)
 
 
