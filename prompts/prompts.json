@@ -1,0 +1,31 @@
+[
+  {
+    "prompt": "What is the capital of France?",
+    "category": "geography",
+    "expected_facts": ["Paris"]
+  },
+  {
+    "prompt": "Who wrote Romeo and Juliet?",
+    "category": "literature",
+    "expected_facts": ["Shakespeare"]
+  },
+  {
+    "prompt": "What is the chemical symbol for water?",
+    "category": "science",
+    "expected_facts": ["H2O"]
+  },
+  {
+    "prompt": "What is the boiling point of water in Celsius?",
+    "category": "science",
+    "expected_facts": ["100"]
+  },
+  {
+    "prompt": "Explain what a REST API is in one sentence.",
+    "category": "technology"
+  },
+  {
+    "prompt": "What is 2 + 2?",
+    "category": "math",
+    "expected_facts": ["4"]
+  }
+]
