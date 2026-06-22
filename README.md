@@ -26,7 +26,7 @@ cp .env.example .env
 
 pip install -r requirements.txt
 pytest tests/
-# report generated at reports/quality_report.html
+# report generated at reports/index.html
 ```
 
 ## Run unit tests (no API key needed)
