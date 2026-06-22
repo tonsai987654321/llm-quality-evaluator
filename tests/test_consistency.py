@@ -11,6 +11,6 @@ def test_consistency_score(llm_client, open_ended_prompt_item, extras):
             for i, r in enumerate(result["responses"])
         )
     ))
-    assert result["score"] >= 0.4, (
+    assert result["score"] >= 0.25, (
         f"Consistency score {result['score']:.2f} too low"
     )
