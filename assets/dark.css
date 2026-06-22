@@ -1,108 +1,115 @@
-/* Dark theme for pytest-html report */
-
+/* ── Dark theme for pytest-html ── */
 :root {
-  --bg: #0d1117;
-  --bg-card: #161b22;
-  --bg-header: #1c2128;
-  --border: #30363d;
-  --text: #e6edf3;
+  --bg:         #0d1117;
+  --bg-card:    #161b22;
+  --bg-header:  #1c2128;
+  --bg-code:    #1a1f28;
+  --border:     #30363d;
+  --text:       #e6edf3;
   --text-muted: #8b949e;
-  --accent: #58a6ff;
-  --passed: #3fb950;
-  --failed: #f85149;
-  --error: #d29922;
-  --skipped: #8b949e;
+  --accent:     #58a6ff;
+  --passed:     #3fb950;
+  --failed:     #f85149;
+  --error:      #d29922;
+  --skipped:    #8b949e;
 }
 
-body {
-  background-color: var(--bg);
-  color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace;
+/* ── Base ── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body, html {
+  background-color: var(--bg) !important;
+  color: var(--text) !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  margin: 0;
 }
 
-h1, h2, h3 {
-  color: var(--text);
+h1, h2, h3, h4, p, span, div, label {
+  color: var(--text) !important;
 }
 
-/* Header / summary bar */
-#header, .summary {
-  background-color: var(--bg-header);
-  border-bottom: 1px solid var(--border);
-}
+a { color: var(--accent) !important; text-decoration: none; }
+a:hover { text-decoration: underline; }
 
-/* Summary counts */
-.summary__badge {
-  border-radius: 4px;
-  padding: 2px 8px;
-  font-weight: bold;
-}
-
-/* Results table */
+/* ── Tables (environment + results) ── */
 table {
-  background-color: var(--bg-card);
-  border-collapse: collapse;
+  background-color: var(--bg-card) !important;
+  border-collapse: collapse !important;
   width: 100%;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  overflow: hidden;
 }
 
 th {
-  background-color: var(--bg-header);
-  color: var(--text-muted);
-  font-size: 0.85rem;
+  background-color: var(--bg-header) !important;
+  color: var(--text-muted) !important;
+  border: 1px solid var(--border) !important;
+  padding: 8px 12px;
   text-transform: uppercase;
+  font-size: 0.8rem;
   letter-spacing: 0.05em;
-  padding: 10px 14px;
-  border-bottom: 1px solid var(--border);
 }
 
 td {
-  padding: 10px 14px;
-  border-bottom: 1px solid var(--border);
-  color: var(--text);
+  background-color: var(--bg-card) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border) !important;
+  padding: 8px 12px;
   vertical-align: top;
 }
 
-tr:last-child td {
-  border-bottom: none;
+/* Kill alternating white rows */
+tr, tr:nth-child(even), tr:nth-child(odd) {
+  background-color: var(--bg-card) !important;
 }
 
-tr:hover td {
-  background-color: rgba(88, 166, 255, 0.05);
+tr:hover td { background-color: #1f2733 !important; }
+
+/* ── Result badge colours ── */
+td.passed, span.passed, .passed { color: var(--passed) !important; font-weight: 600; }
+td.failed, span.failed, .failed { color: var(--failed) !important; font-weight: 600; }
+td.error,  span.error,  .error  { color: var(--error)  !important; font-weight: 600; }
+td.skipped,span.skipped,.skipped{ color: var(--skipped)!important; }
+
+/* ── Code / log blocks ── */
+pre, code, .log, .log-text, .stacktrace {
+  background-color: var(--bg-code) !important;
+  color: #cdd9e5 !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 4px;
+  padding: 10px 14px;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  overflow-x: auto;
+  white-space: pre-wrap;
 }
 
-/* Result badges */
-.passed, td.passed, span.passed { color: var(--passed); font-weight: 600; }
-.failed, td.failed, span.failed { color: var(--failed); font-weight: 600; }
-.error,  td.error,  span.error  { color: var(--error);  font-weight: 600; }
-.skipped,td.skipped,span.skipped{ color: var(--skipped);}
-
-/* Collapsible extras */
-details { margin-top: 4px; }
-details summary {
-  cursor: pointer;
-  color: var(--accent);
-  font-size: 0.85rem;
-}
-details[open] summary { margin-bottom: 6px; }
-.extraHTML, .extra {
-  background-color: var(--bg);
-  border: 1px solid var(--border);
+/* ── Extras (score HTML injected by tests) ── */
+.extraHTML, .extra, details div {
+  background-color: var(--bg-code) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border) !important;
   border-radius: 4px;
   padding: 8px 12px;
-  font-size: 0.9rem;
-  line-height: 1.6;
+  margin-top: 4px;
+  font-size: 0.88rem;
+  line-height: 1.7;
 }
 
-/* Links */
-a { color: var(--accent); text-decoration: none; }
-a:hover { text-decoration: underline; }
+details summary {
+  cursor: pointer;
+  color: var(--accent) !important;
+  font-size: 0.84rem;
+  padding: 2px 0;
+}
 
-/* Filter bar */
-.filter { background-color: var(--bg-header); border: 1px solid var(--border); border-radius: 4px; padding: 4px 8px; color: var(--text); }
+/* ── Summary / filter bar ── */
+#summary-table, .summary, #results-table {
+  background-color: var(--bg) !important;
+}
 
-/* Scrollbar */
+input[type="checkbox"] { accent-color: var(--accent); }
+
+/* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #484f58; }
